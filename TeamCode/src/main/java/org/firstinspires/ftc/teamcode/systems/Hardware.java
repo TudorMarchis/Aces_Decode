@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.systems;
 
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -13,6 +14,8 @@ public class Hardware {
         rightMotorBack = hardwareMap.get(DcMotorEx.class, "dreapta_spate");
         rightMotorFront = hardwareMap.get(DcMotorEx.class, "dreapta_fata");
         leftMotorFront = hardwareMap.get(DcMotorEx.class, "stanga_fata");
+
+
 
             launchFront = hardwareMap.get(DcMotorEx.class, "frontlift");
             launchBack = hardwareMap.get(DcMotorEx.class, "backlift");
