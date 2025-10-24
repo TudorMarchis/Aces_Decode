@@ -8,4 +8,8 @@ public class Constants {
     public static long launchTime=200, comeback=100;
     public static long timpparcat=500;
     public static int stoppos=-50;
+
+
+    public static double elicieinit = 0;
+    public static double increase = 0.55, decrease =0.55;
 }

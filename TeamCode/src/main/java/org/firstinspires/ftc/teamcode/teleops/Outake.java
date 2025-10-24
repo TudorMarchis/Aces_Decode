@@ -15,10 +15,10 @@ public class Outake extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         sys =  new Hardware(hardwareMap);
         waitForStart();
-        sys.launchFront.setPower(launchSpeed);
-        sys.positioner.setPower(launchSpeed);
-        sys.launchBack.setPower(launchSpeed);
-        sys.extramotor.setPower(launchSpeed);
-        while (opModeIsActive()){}
+ //       sys.launchFront.setPower(launchSpeed);
+ //       sys.positioner.setPower(launchSpeed);
+ //       sys.launchBack.setPower(launchSpeed);
+ //       sys.extramotor.setPower(launchSpeed);
+ //       while (opModeIsActive()){}
     }
 }

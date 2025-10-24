@@ -1,26 +1,30 @@
 package org.firstinspires.ftc.teamcode.systems;
 
+import static org.firstinspires.ftc.teamcode.utils.Constants.elicieinit;
+
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class Hardware {
     public DcMotorEx leftMotorBack, rightMotorBack, rightMotorFront, leftMotorFront;
-    public DcMotorEx launchFront,launchBack, positioner, extramotor;
+
+
+    public Servo sorter;
     public Hardware(HardwareMap hardwareMap){
         leftMotorBack = hardwareMap.get(DcMotorEx.class, "stanga_spate");
         rightMotorBack = hardwareMap.get(DcMotorEx.class, "dreapta_spate");
         rightMotorFront = hardwareMap.get(DcMotorEx.class, "dreapta_fata");
         leftMotorFront = hardwareMap.get(DcMotorEx.class, "stanga_fata");
+        sorter = hardwareMap.get(Servo.class, "elice");
 
 
 
-            launchFront = hardwareMap.get(DcMotorEx.class, "frontlift");
-            launchBack = hardwareMap.get(DcMotorEx.class, "backlift");
-            positioner = hardwareMap.get(DcMotorEx.class, "positioner");
-            extramotor = hardwareMap.get(DcMotorEx.class, "fuckass"); // Olaie stie ce face
+
+
 
         leftMotorBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightMotorBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -37,13 +41,7 @@ public class Hardware {
         leftMotorFront.setDirection(DcMotorEx.Direction.REVERSE);
         leftMotorBack.setDirection(DcMotorEx.Direction.REVERSE);
 
-        launchFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        extramotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        launchFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        extramotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-
-        launchFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
 
