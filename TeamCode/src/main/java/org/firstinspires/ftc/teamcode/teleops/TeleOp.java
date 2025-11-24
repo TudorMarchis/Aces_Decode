@@ -12,43 +12,46 @@ import static org.firstinspires.ftc.teamcode.utils.Constants.stoppos;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.systems.Hardware;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp
 public class TeleOp extends LinearOpMode {
     Hardware sys;
+    Servo sorter;
     double elicie = elicieinit;
 
     public void eliciepozitiva(){
         elicie += increase;
         elicie = Math.min(elicie, 1);
-        sys.sorter.setPosition(elicie);
+        sorter.setPosition(elicie);
 
     }
 
     public void elicienegativa(){
         elicie -= decrease;
         elicie = Math.max(elicie,0);
-        sys.sorter.setPosition(elicie);
+        sorter.setPosition(elicie);
 
     }
     @Override
     public void runOpMode() throws InterruptedException {
-        sys = new Hardware(hardwareMap);
-        sys.sorter.setPosition(elicieinit);
+//        sys = new Hardware(hardwareMap);
+        sorter = hardwareMap.get(Servo.class, "sorter");
+        sorter.setPosition(elicieinit);
 
         waitForStart();
         while (opModeIsActive()){
 
             // Movement
-            double px = - gamepad1.right_stick_x * sniperSpeed;
-            double py = - gamepad1.right_stick_y * sniperSpeed;
-            double pp = gamepad1.left_stick_x * sniperSpeed;
-            sys.leftMotorBack.setPower(py + pp + px);
-            sys.leftMotorFront.setPower(py + pp - px);
-            sys.rightMotorBack.setPower(py - pp - px);
-            sys.rightMotorFront.setPower(py - pp + px);
+//            double px = - gamepad1.right_stick_x * sniperSpeed;
+//            double py = - gamepad1.right_stick_y * sniperSpeed;
+//            double pp = gamepad1.left_stick_x * sniperSpeed;
+//            sys.leftMotorBack.setPower(py + pp + px);
+//            sys.leftMotorFront.setPower(py + pp - px);
+//            sys.rightMotorBack.setPower(py - pp - px);
+//            sys.rightMotorFront.setPower(py - pp + px);
 
             if(gamepad1.right_bumper){
                 eliciepozitiva();
@@ -60,9 +63,11 @@ public class TeleOp extends LinearOpMode {
                 sleep(400);
             }
             if(gamepad1.cross){
-                sys.sorter.setPosition(0);
+                sorter.setPosition(0);
             }
 
+            telemetry.addData("Pos", elicie);
+            telemetry.update();
 
        }
     }

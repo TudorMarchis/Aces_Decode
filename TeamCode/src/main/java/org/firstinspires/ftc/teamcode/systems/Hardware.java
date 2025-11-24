@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.systems;
 
 import static org.firstinspires.ftc.teamcode.utils.Constants.elicieinit;
+import static org.firstinspires.ftc.teamcode.utils.Constants.minDetect;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -11,8 +12,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Hardware {
     public DcMotorEx leftMotorBack, rightMotorBack, rightMotorFront, leftMotorFront;
-
-
     public Servo sorter;
     public Hardware(HardwareMap hardwareMap){
         leftMotorBack = hardwareMap.get(DcMotorEx.class, "stanga_spate");
@@ -20,11 +19,6 @@ public class Hardware {
         rightMotorFront = hardwareMap.get(DcMotorEx.class, "dreapta_fata");
         leftMotorFront = hardwareMap.get(DcMotorEx.class, "stanga_fata");
         sorter = hardwareMap.get(Servo.class, "elice");
-
-
-
-
-
 
         leftMotorBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightMotorBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -41,8 +35,10 @@ public class Hardware {
         leftMotorFront.setDirection(DcMotorEx.Direction.REVERSE);
         leftMotorBack.setDirection(DcMotorEx.Direction.REVERSE);
 
-
-
     }
 
+
+
 }
+
+
