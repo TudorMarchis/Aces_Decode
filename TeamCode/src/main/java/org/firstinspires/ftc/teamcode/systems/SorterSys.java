@@ -10,14 +10,17 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.utils.Constants.*;
 
 public class SorterSys {
+    public boolean canIntake = true;
     public ColorSensorData[] mem = {ColorSensorData.Nan, ColorSensorData.Nan, ColorSensorData.Nan};
-    int curstep=0;
+    public int curstep=0;
     Servo sorterStep;
     public SorterSys(HardwareMap hardwareMap){
         sorterStep = hardwareMap.get(Servo.class, "sorter");
+        turnToStep(curstep);
     }
 
     public void depositArtifact(ColorSensorData color){
+        if(curstep==-1){return;}
         mem[curstep]=color;
         curstep = findEmpty();
         if(curstep!=-1){turnToStep(curstep);}
@@ -32,6 +35,7 @@ public class SorterSys {
     }
 
     void turnToStep(int wantedStep){
+//        curstep = wantedStep;
         switch (wantedStep){
             case 0:
                 sorterStep.setPosition(sorterpos0);
@@ -42,8 +46,20 @@ public class SorterSys {
             case 2:
                 sorterStep.setPosition(sorterpos2);
                 break;
+
+
         }
     }
+
+    public void loadType(ColorSensorData color){
+        for(int i=0;i<=2;i++){
+            if(mem[i]==color){
+                turnToStep(i);
+                break;
+            }
+        }
+    }
+
 
 
 }

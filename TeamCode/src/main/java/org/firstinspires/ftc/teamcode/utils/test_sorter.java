@@ -19,11 +19,17 @@ public class test_sorter extends LinearOpMode {
         waitForStart();
 
         while(opModeIsActive()){
-            if(gamepad1.a){sorter.depositArtifact(ColorSensorData.Green);};
+            if(gamepad1.a){
+                if(sorter.curstep == -1){gamepad1.rumble(50);}else{
+                    sorter.depositArtifact(ColorSensorData.Green);
+                }
+                sleep(500);
+            };
                 telemetry.addData("Color0", sorter.mem[0]);
                 telemetry.addData("Color1", sorter.mem[1]);
                 telemetry.addData("Color2", sorter.mem[2]);
                 telemetry.update();
+
 
         }
 
