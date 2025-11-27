@@ -7,20 +7,31 @@ import static org.firstinspires.ftc.teamcode.utils.Constants.elicieinit;
 import static org.firstinspires.ftc.teamcode.utils.Constants.increase;
 import static org.firstinspires.ftc.teamcode.utils.Constants.launchSpeed;
 import static org.firstinspires.ftc.teamcode.utils.Constants.launchTime;
+import static org.firstinspires.ftc.teamcode.utils.Constants.slot1;
 import static org.firstinspires.ftc.teamcode.utils.Constants.sniperSpeed;
 import static org.firstinspires.ftc.teamcode.utils.Constants.stoppos;
 
+import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.systems.ColorSensorData;
 import org.firstinspires.ftc.teamcode.systems.Hardware;
+import org.firstinspires.ftc.teamcode.systems.SensorSys;
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp
+@Configurable
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Rezerva2.0", group = "teleop")
 public class TeleOp extends LinearOpMode {
     Hardware sys;
     Servo sorter;
+
+    public SensorSys sensor;
+
+
     double elicie = elicieinit;
+
 
     public void eliciepozitiva(){
         elicie += increase;
@@ -37,12 +48,24 @@ public class TeleOp extends LinearOpMode {
     }
     @Override
     public void runOpMode() throws InterruptedException {
-//        sys = new Hardware(hardwareMap);
+      // sys = new Hardware(hardwareMap);
         sorter = hardwareMap.get(Servo.class, "sorter");
+        sensor = new SensorSys(hardwareMap);
         sorter.setPosition(elicieinit);
+
 
         waitForStart();
         while (opModeIsActive()){
+            ColorSensorData detected = sensor.getSensorData();
+
+
+            if(detected == ColorSensorData.Green){
+                telemetry.addLine("Bila curenta: verde");
+            }else if(detected == ColorSensorData.Purple){
+                telemetry.addLine("Bila curenta: Mov");
+            }else{
+                telemetry.addLine("Nicio bila");
+            }
 
             // Movement
 //            double px = - gamepad1.right_stick_x * sniperSpeed;
@@ -55,19 +78,19 @@ public class TeleOp extends LinearOpMode {
 
             if(gamepad1.right_bumper){
                 eliciepozitiva();
-                sleep(400);
+                sleep(300);
             }
 
             if(gamepad1.left_bumper){
                 elicienegativa();
-                sleep(400);
+                sleep(300);
             }
             if(gamepad1.cross){
-                sorter.setPosition(0);
+                sorter.setPosition(elicieinit);
             }
 
-            telemetry.addData("Pos", elicie);
-            telemetry.update();
+
+
 
        }
     }

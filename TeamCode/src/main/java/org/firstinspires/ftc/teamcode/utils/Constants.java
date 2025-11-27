@@ -13,6 +13,9 @@ public class Constants {
     public static int stoppos=-50;
 
     public static int minDetect=75;
-    public static double elicieinit = 0;
-    public static double increase = 0.05, decrease =0.05;
+    public static double elicieinit = 0.014;
+    public static double increase = 0.066, decrease =0.066;
+
+    public static double slot1= 0.014, slot2=0.08, slot3=0.146;
+    public static double sorterinit=0.014;
 }
