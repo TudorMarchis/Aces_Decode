@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.systems.Hardware;
 import org.firstinspires.ftc.teamcode.systems.SensorSys;
 
 @Configurable
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Rezerva2.0", group = "teleop")
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "nu ii gata", group = "teleop")
 public class TeleOp extends LinearOpMode {
     Hardware sys;
     Servo sorter;
@@ -68,7 +68,7 @@ public class TeleOp extends LinearOpMode {
             }
 
             // Movement
-//            double px = - gamepad1.right_stick_x * sniperSpeed;
+//           double px = - gamepad1.right_stick_x * sniperSpeed;
 //            double py = - gamepad1.right_stick_y * sniperSpeed;
 //            double pp = gamepad1.left_stick_x * sniperSpeed;
 //            sys.leftMotorBack.setPower(py + pp + px);

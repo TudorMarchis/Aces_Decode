@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.utils;
 import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.systems.ColorSensorData;
@@ -13,12 +14,14 @@ import org.firstinspires.ftc.teamcode.systems.SorterSys;
 @Configurable
 @TeleOp(name = "test_sorter_full", group = "teleop")
 public class test_sorter_smart extends LinearOpMode {
+
     public SorterSys sorter;
     public SensorSys sensor;
     @Override
     public void runOpMode() throws InterruptedException {
         sorter = new SorterSys(hardwareMap);
         sensor = new SensorSys(hardwareMap);
+
         waitForStart();
 
         while(opModeIsActive()){
