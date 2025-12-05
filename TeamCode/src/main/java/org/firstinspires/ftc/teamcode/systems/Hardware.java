@@ -19,7 +19,7 @@ public class Hardware {
         rightMotorBack = hardwareMap.get(DcMotorEx.class, "dreapta_spate");
         rightMotorFront = hardwareMap.get(DcMotorEx.class, "dreapta_fata");
         leftMotorFront = hardwareMap.get(DcMotorEx.class, "stanga_fata");
-        intake = hardwareMap.get(DcMotor.class, "intake");
+       // intake = hardwareMap.get(DcMotor.class, "intake");
         sorter = hardwareMap.get(Servo.class, "sorter");
 
         leftMotorBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
