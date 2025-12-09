@@ -1,10 +1,9 @@
-package org.firstinspires.ftc.teamcode.utils;
+package org.firstinspires.ftc.teamcode.teleops;
 
 
 import static org.firstinspires.ftc.teamcode.utils.Constants.slot1;
 import static org.firstinspires.ftc.teamcode.utils.Constants.slot2;
 import static org.firstinspires.ftc.teamcode.utils.Constants.slot3;
-import static org.firstinspires.ftc.teamcode.utils.Constants.sniperSpeed;
 import static org.firstinspires.ftc.teamcode.utils.Constants.sorterinit;
 
 import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
@@ -14,7 +13,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.systems.ColorSensorData;
-import org.firstinspires.ftc.teamcode.systems.Hardware;
+import org.firstinspires.ftc.teamcode.systems.LiftSys;
 import org.firstinspires.ftc.teamcode.systems.SensorSys;
 
 @Configurable
@@ -25,6 +24,8 @@ public class Teleop_rezerva extends LinearOpMode {
 
   //  Hardware sys;
     public SensorSys sensor;
+
+    public LiftSys lift;
 
 
 
@@ -45,6 +46,7 @@ public class Teleop_rezerva extends LinearOpMode {
          sorter = hardwareMap.get(Servo.class, "sorter");
          intake = hardwareMap.get(DcMotor.class, "intake");
          sensor = new SensorSys(hardwareMap);
+         lift = new LiftSys( hardwareMap);
          sorter.setPosition(sorterinit);
 
 
@@ -80,6 +82,12 @@ public class Teleop_rezerva extends LinearOpMode {
                   intake.setPower(0);
               }
 
+              if(gamepad1.dpad_up){
+                  lift.LiftUp();
+              }
+              if(gamepad1.dpad_down){
+                  lift.LiftDown();
+              }
 
   /*            //Movement
              double px = -gamepad1.right_stick_x * sniperSpeed;

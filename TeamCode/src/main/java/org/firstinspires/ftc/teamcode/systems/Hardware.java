@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Hardware {
     public DcMotorEx leftMotorBack, rightMotorBack, rightMotorFront, leftMotorFront;
     public DcMotor intake;
-    public Servo sorter;
+    public Servo sorter, lift;
     public Hardware(HardwareMap hardwareMap){
         leftMotorBack = hardwareMap.get(DcMotorEx.class, "stanga_spate");
         rightMotorBack = hardwareMap.get(DcMotorEx.class, "dreapta_spate");
@@ -21,6 +21,7 @@ public class Hardware {
         leftMotorFront = hardwareMap.get(DcMotorEx.class, "stanga_fata");
        // intake = hardwareMap.get(DcMotor.class, "intake");
         sorter = hardwareMap.get(Servo.class, "sorter");
+        lift =hardwareMap.get(Servo.class, "lift");
 
         leftMotorBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightMotorBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
