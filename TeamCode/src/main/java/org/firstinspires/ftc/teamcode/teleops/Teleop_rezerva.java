@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.systems.AngleSys;
 import org.firstinspires.ftc.teamcode.systems.ColorSensorData;
 import org.firstinspires.ftc.teamcode.systems.LiftSys;
 import org.firstinspires.ftc.teamcode.systems.SensorSys;
@@ -20,12 +21,14 @@ import org.firstinspires.ftc.teamcode.systems.SensorSys;
 @TeleOp(name = "Rezerva1.0", group = "teleop")
 public class Teleop_rezerva extends LinearOpMode {
     public Servo sorter;
-    public DcMotor intake;
+    public DcMotor intake, shoot;
 
   //  Hardware sys;
     public SensorSys sensor;
 
-    public LiftSys lift;
+   // public LiftSys lift;
+
+    public AngleSys angle;
 
 
 
@@ -44,9 +47,11 @@ public class Teleop_rezerva extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         // sys = new Hardware(hardwareMap);
          sorter = hardwareMap.get(Servo.class, "sorter");
-         intake = hardwareMap.get(DcMotor.class, "intake");
+       //  intake = hardwareMap.get(DcMotor.class, "intake");
+         shoot = hardwareMap.get(DcMotor.class, "shoot");
          sensor = new SensorSys(hardwareMap);
-         lift = new LiftSys( hardwareMap);
+       //  lift = new LiftSys( hardwareMap);
+         angle = new AngleSys(hardwareMap);
          sorter.setPosition(sorterinit);
 
 
@@ -75,18 +80,32 @@ public class Teleop_rezerva extends LinearOpMode {
              if(gamepad1.cross){
                  Slotul3();
              }
-              if(gamepad1.square){
+        /*      if(gamepad1.square){
                   intake.setPower(1);
 
               }else{
                   intake.setPower(0);
               }
-
-              if(gamepad1.dpad_up){
+*/
+  /*            if(gamepad1.dpad_up){
                   lift.LiftUp();
               }
               if(gamepad1.dpad_down){
                   lift.LiftDown();
+              }
+*/
+              if(gamepad2.dpad_up){
+                  angle.Increase();
+                  sleep(300);
+              }
+              if(gamepad2.dpad_down){
+                  angle.Decrease();
+                  sleep(300);
+              }
+              if(gamepad2.cross){
+                  shoot.setPower(-1);
+              }else{
+                  shoot.setPower(0);
               }
 
   /*            //Movement

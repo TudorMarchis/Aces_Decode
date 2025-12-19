@@ -16,7 +16,7 @@ public class test_intake extends LinearOpMode {
         waitForStart();
 
         while(opModeIsActive()){
-            intake.setPower(1);
+            intake.setPower(-1);
         }
 
     }
