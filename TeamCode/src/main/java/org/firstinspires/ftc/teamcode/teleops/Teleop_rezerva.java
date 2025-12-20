@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.teleops;
 import static org.firstinspires.ftc.teamcode.utils.Constants.slot1;
 import static org.firstinspires.ftc.teamcode.utils.Constants.slot2;
 import static org.firstinspires.ftc.teamcode.utils.Constants.slot3;
+import static org.firstinspires.ftc.teamcode.utils.Constants.sniperSpeed;
 import static org.firstinspires.ftc.teamcode.utils.Constants.sorterinit;
 
 import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
@@ -14,20 +15,25 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.systems.AngleSys;
 import org.firstinspires.ftc.teamcode.systems.ColorSensorData;
+import org.firstinspires.ftc.teamcode.systems.Hardware;
+import org.firstinspires.ftc.teamcode.systems.IntakeSys;
 import org.firstinspires.ftc.teamcode.systems.LiftSys;
+import org.firstinspires.ftc.teamcode.systems.OutakeSys;
 import org.firstinspires.ftc.teamcode.systems.SensorSys;
 
 @Configurable
 @TeleOp(name = "Rezerva1.0", group = "teleop")
 public class Teleop_rezerva extends LinearOpMode {
     public Servo sorter;
-    public DcMotor intake, shoot;
 
-  //  Hardware sys;
+   Hardware sys;
     public SensorSys sensor;
 
-   // public LiftSys lift;
+    public OutakeSys outake;
+    public IntakeSys mainMotor;
 
+
+   // public LiftSys lift;
     public AngleSys angle;
 
 
@@ -45,11 +51,11 @@ public class Teleop_rezerva extends LinearOpMode {
     }
     @Override
     public void runOpMode() throws InterruptedException {
-        // sys = new Hardware(hardwareMap);
+        sys = new Hardware(hardwareMap);
          sorter = hardwareMap.get(Servo.class, "sorter");
-       //  intake = hardwareMap.get(DcMotor.class, "intake");
-         shoot = hardwareMap.get(DcMotor.class, "shoot");
+         outake = new OutakeSys(hardwareMap);
          sensor = new SensorSys(hardwareMap);
+      //   mainMotor = new IntakeSys(hardwareMap);
        //  lift = new LiftSys( hardwareMap);
          angle = new AngleSys(hardwareMap);
          sorter.setPosition(sorterinit);
@@ -80,13 +86,13 @@ public class Teleop_rezerva extends LinearOpMode {
              if(gamepad1.cross){
                  Slotul3();
              }
-        /*      if(gamepad1.square){
-                  intake.setPower(1);
+/*             if(gamepad1.square){
+                  mainMotor.startIntake();
 
               }else{
-                  intake.setPower(0);
+                  mainMotor.stopIntake();
               }
-*/
+
   /*            if(gamepad1.dpad_up){
                   lift.LiftUp();
               }
@@ -103,12 +109,12 @@ public class Teleop_rezerva extends LinearOpMode {
                   sleep(300);
               }
               if(gamepad2.cross){
-                  shoot.setPower(-1);
+                  outake.StartOutake();
               }else{
-                  shoot.setPower(0);
+                  outake.StopOutake();
               }
 
-  /*            //Movement
+            //Movement
              double px = -gamepad1.right_stick_x * sniperSpeed;
               double py = -gamepad1.right_stick_y * sniperSpeed;
               double pp = -gamepad1.left_stick_x * sniperSpeed;
@@ -117,7 +123,7 @@ public class Teleop_rezerva extends LinearOpMode {
               sys.rightMotorBack.setPower(py-pp-px);
               sys.rightMotorFront.setPower(py-pp+px);
 
-*/
+
 
              telemetry.update();
 
