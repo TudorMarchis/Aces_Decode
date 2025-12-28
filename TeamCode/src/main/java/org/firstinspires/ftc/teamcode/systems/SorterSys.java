@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.utils.Constants.*;
 
-public class SorterSys {
+public class  SorterSys {
     public boolean canIntake = true;
     public ColorSensorData[] mem = {ColorSensorData.Nan, ColorSensorData.Nan, ColorSensorData.Nan};
     public int curstep=0;

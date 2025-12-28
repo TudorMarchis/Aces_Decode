@@ -12,6 +12,7 @@ public class OutakeSys {
         outake.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
 
+
     }
 
     public void StartOutake(){

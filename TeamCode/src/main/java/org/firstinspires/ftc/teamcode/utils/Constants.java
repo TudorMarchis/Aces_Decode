@@ -18,4 +18,6 @@ public class Constants {
 
     public static double slot1= 0.014, slot2=0.08, slot3=0.146;
     public static double sorterinit=0.014;
+
+    public static double liftup = 0.3, liftdown = 0.06;
 }
