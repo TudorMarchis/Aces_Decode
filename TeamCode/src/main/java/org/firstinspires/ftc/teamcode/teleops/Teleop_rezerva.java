@@ -33,7 +33,7 @@ public class Teleop_rezerva extends LinearOpMode {
     public IntakeSys mainMotor;
 
 
-   // public LiftSys lift;
+    public LiftSys lift;
     public AngleSys angle;
 
 
@@ -56,8 +56,8 @@ public class Teleop_rezerva extends LinearOpMode {
          outake = new OutakeSys(hardwareMap);
          sensor = new SensorSys(hardwareMap);
       //   mainMotor = new IntakeSys(hardwareMap);
-       //  lift = new LiftSys( hardwareMap);
-         angle = new AngleSys(hardwareMap);
+        lift = new LiftSys( hardwareMap);
+      //   angle = new AngleSys(hardwareMap);
          sorter.setPosition(sorterinit);
 
 
@@ -86,21 +86,23 @@ public class Teleop_rezerva extends LinearOpMode {
              if(gamepad1.cross){
                  Slotul3();
              }
-/*             if(gamepad1.square){
+ /*            if(gamepad1.square){
                   mainMotor.startIntake();
 
               }else{
                   mainMotor.stopIntake();
               }
 
-  /*            if(gamepad1.dpad_up){
+  */
+
+            if(gamepad1.dpad_up){
                   lift.LiftUp();
               }
               if(gamepad1.dpad_down){
                   lift.LiftDown();
               }
-*/
-              if(gamepad2.dpad_up){
+
+/*              if(gamepad2.dpad_up){
                   angle.Increase();
                   sleep(300);
               }
@@ -108,6 +110,8 @@ public class Teleop_rezerva extends LinearOpMode {
                   angle.Decrease();
                   sleep(300);
               }
+
+ */
               if(gamepad2.cross){
                   outake.StartOutake();
               }else{

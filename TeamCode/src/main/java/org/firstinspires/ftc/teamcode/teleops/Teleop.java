@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.teleops;
 
+import static org.firstinspires.ftc.teamcode.utils.Constants.sniperSpeed;
+
 import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -23,7 +25,7 @@ public class Teleop extends LinearOpMode {
     public LiftSys lift;
     public IntakeSys mainmotor;
     public OutakeSys outake;
-    public AngleSys angle;
+  //  public AngleSys angle;
     @Override
     public void runOpMode() throws InterruptedException {
         sys = new Hardware(hardwareMap);
@@ -32,7 +34,7 @@ public class Teleop extends LinearOpMode {
         lift = new LiftSys(hardwareMap);
         mainmotor = new IntakeSys(hardwareMap);
         outake =new OutakeSys(hardwareMap);
-        angle = new AngleSys(hardwareMap);
+  //      angle = new AngleSys(hardwareMap);
 
         waitForStart();
 
@@ -66,7 +68,7 @@ public class Teleop extends LinearOpMode {
                 mainmotor.stopIntake();
             }
 
-            if(gamepad2.dpad_up){
+  /*          if(gamepad2.dpad_up){
                 angle.Increase();
                 sleep(300);
             }
@@ -75,6 +77,8 @@ public class Teleop extends LinearOpMode {
                 angle.Decrease();
                 sleep(300);
             }
+
+   */
 
             if(gamepad2.cross){
                 outake.StartOutake();
@@ -88,6 +92,14 @@ public class Teleop extends LinearOpMode {
             if(gamepad2.left_bumper){
                 lift.LiftDown();
             }
+
+            double px = -gamepad1.right_stick_x * sniperSpeed;
+            double py = -gamepad1.right_stick_y * sniperSpeed;
+            double pp = -gamepad1.left_stick_x * sniperSpeed;
+            sys.leftMotorBack.setPower(py+px+pp);
+            sys.leftMotorFront.setPower(py+pp-px);
+            sys.rightMotorBack.setPower(py-pp-px);
+            sys.rightMotorFront.setPower(py-pp+px);
 
 
 
