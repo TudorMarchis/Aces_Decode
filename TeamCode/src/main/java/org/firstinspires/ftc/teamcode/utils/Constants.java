@@ -5,21 +5,21 @@ import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
 @Configurable
 public class Constants {
     //Sorter
-    public static double sorterpos0=0.17,sorterpos1=0.57,sorterpos2=0.97;
+    public static double sorterpos0=0.13,sorterpos1=0.515,sorterpos2=0.9;
 
     public static double sniperSpeed = 0.7, launchSpeed=1,counterforce=-0.5;
     public static long launchTime=200, comeback=100;
     public static long timpparcat=500;
     public static int stoppos=-50;
 
-    public static int minDetect=75;
+    public static int minDetect=145;
     public static double increase = 0.1, decrease =0.1;
     public static double angleinit= 1;
 
     public static double slot1= 0.014, slot2=0.08, slot3=0.146;
     public static double sorterinit=0.014;
 
-    public static double liftup = 0.3, liftdown = 0.06;
+    public static double liftup = 0.3, liftdown = 0.05;
 
 
 }

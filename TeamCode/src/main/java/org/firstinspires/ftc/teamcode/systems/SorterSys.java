@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.systems;
 
+import static org.firstinspires.ftc.teamcode.utils.Constants.slot1;
 import static org.firstinspires.ftc.teamcode.utils.Constants.sorterpos0;
 import static org.firstinspires.ftc.teamcode.utils.Constants.sorterpos1;
 import static org.firstinspires.ftc.teamcode.utils.Constants.sorterpos2;
@@ -58,6 +59,22 @@ public class  SorterSys {
                 break;
             }
         }
+    }
+
+    public void freeUp(int ind){
+        mem[ind]=ColorSensorData.Nan;
+    }
+
+    public void Slot1(){
+        sorterStep.setPosition(sorterpos0);
+    }
+
+    public void Slot2(){
+        sorterStep.setPosition(sorterpos1);
+    }
+
+    public void Slot3(){
+        sorterStep.setPosition(sorterpos2);
     }
 
 

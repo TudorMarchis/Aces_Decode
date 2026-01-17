@@ -25,6 +25,8 @@ public class Teleop extends LinearOpMode {
     public IntakeSys intake;
     public OutakeSys outake;
   //  public AngleSys angle;
+
+
     @Override
     public void runOpMode() throws InterruptedException {
         sys = new Hardware(hardwareMap);
@@ -37,6 +39,19 @@ public class Teleop extends LinearOpMode {
 
         waitForStart();
 
+        new Thread(() -> {
+            while(opModeIsActive()){
+                double px = -gamepad2.left_stick_x * sniperSpeed;
+                double py = -gamepad2.left_stick_y * sniperSpeed;
+                double pp = gamepad2.right_stick_x * sniperSpeed;
+                sys.leftMotorBack.setPower(py+px+pp);
+                sys.leftMotorFront.setPower(py+pp-px);
+                sys.rightMotorBack.setPower(py-pp-px);
+                sys.rightMotorFront.setPower(py-pp+px);
+            }
+
+        }).start();
+
         while(opModeIsActive()){
 
             telemetry.addData("Color0", sorter.mem[0]);
@@ -44,7 +59,7 @@ public class Teleop extends LinearOpMode {
             telemetry.addData("Color2", sorter.mem[2]);
             telemetry.update();
 
-            if(gamepad1.cross){
+     /*       if(gamepad1.cross){
                 sorter.canIntake = false;
                 sorter.loadType(ColorSensorData.Green);
                 sleep(350);
@@ -54,8 +69,8 @@ public class Teleop extends LinearOpMode {
                 sleep(350);
             }
             sorter.canIntake = true;
-
-            if(gamepad1.square){
+*/
+            if(gamepad1.left_bumper){
                 intake.startIntake();
             }else{
                 intake.stopIntake();
@@ -66,45 +81,53 @@ public class Teleop extends LinearOpMode {
                 if(sensorOutput != ColorSensorData.Nan && sorter.canIntake){
                     sleep(300);
                     sorter.depositArtifact(sensorOutput);
-                    sleep(650);
+                    sleep(1000);
                 };
                 telemetry.addData("Color0", sorter.mem[0]);
                 telemetry.addData("Color1", sorter.mem[1]);
                 telemetry.addData("Color2", sorter.mem[2]);
                 telemetry.update();
 
-                if(gamepad1.cross){
-                    sorter.canIntake = false;
-                    sorter.loadType(ColorSensorData.Green);
-                    sleep(350);
-                }else if(gamepad1.circle){
-                    sorter.canIntake = false;
-                    sorter.loadType(ColorSensorData.Purple);
-                    sleep(350);
-                }
-
                 sorter.canIntake = true;
             }
 
             if(gamepad1.cross){
                 outake.StartOutake();
-                sleep(400);
-                sorter.canIntake = false;
-                sorter.loadType(ColorSensorData.Green);
-                sleep(400);
+//                sleep(4?00);
+                sorter.Slot1();
+                sleep(1500);
                 lift.LiftUp();
-                sleep(700);
+                sleep(600);
                 lift.LiftDown();
+                outake.StopOutake();
+                sorter.freeUp(0);
             }else if(gamepad1.circle){
                 outake.StartOutake();
-                sleep(300);
-                sorter.canIntake = false;
-                sorter.loadType(ColorSensorData.Green);
-                sleep(350);
+//                sleep(300);
+                sorter.Slot2();
+                sleep(1500);
                 lift.LiftUp();
-                sleep(700);
+                sleep(600);
                 lift.LiftDown();
+                outake.StopOutake();
+                sorter.freeUp(1);
 
+            }else if(gamepad1.triangle){
+                outake.StartOutake();
+//                sleep(300);
+                sorter.Slot3();
+                sleep(1500);
+                lift.LiftUp();
+                sleep(600);
+                lift.LiftDown();
+                outake.StopOutake();
+                sorter.freeUp(2);
+            }
+            if(gamepad1.right_bumper){
+                intake.ReverseIntake();
+
+            }else{
+                intake.stopIntake();
             }
 
   /*          if(gamepad2.dpad_up){if(gamepad1.cross){
@@ -140,13 +163,6 @@ public class Teleop extends LinearOpMode {
                 lift.LiftDown();
             }
 
-            double px = -gamepad1.right_stick_x * sniperSpeed;
-            double py = -gamepad1.right_stick_y * sniperSpeed;
-            double pp = -gamepad1.left_stick_x * sniperSpeed;
-            sys.leftMotorBack.setPower(py+px+pp);
-            sys.leftMotorFront.setPower(py+pp-px);
-            sys.rightMotorBack.setPower(py-pp-px);
-            sys.rightMotorFront.setPower(py-pp+px);
 
 
 

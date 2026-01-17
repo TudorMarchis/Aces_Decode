@@ -120,7 +120,7 @@ public class Teleop_rezerva extends LinearOpMode {
 
             //Movement
              double px = -gamepad1.right_stick_x * sniperSpeed;
-              double py = -gamepad1.right_stick_y * sniperSpeed;
+              double py = gamepad1.right_stick_y * sniperSpeed;
               double pp = -gamepad1.left_stick_x * sniperSpeed;
               sys.leftMotorBack.setPower(py+pp+px);
               sys.leftMotorFront.setPower(py+pp-px);

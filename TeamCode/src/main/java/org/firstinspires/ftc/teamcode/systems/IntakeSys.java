@@ -24,4 +24,9 @@ public class IntakeSys{
         mainMotor.setPower(0);
         active = false;
     }
+
+    public void ReverseIntake(){
+        mainMotor.setPower(1);
+    }
+
 }
