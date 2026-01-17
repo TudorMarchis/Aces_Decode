@@ -5,7 +5,7 @@ import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
 @Configurable
 public class Constants {
     //Sorter
-    public static double sorterpos0=0.075,sorterpos1=0.15,sorterpos2=0.224;
+    public static double sorterpos0=0.17,sorterpos1=0.57,sorterpos2=0.97;
 
     public static double sniperSpeed = 0.7, launchSpeed=1,counterforce=-0.5;
     public static long launchTime=200, comeback=100;

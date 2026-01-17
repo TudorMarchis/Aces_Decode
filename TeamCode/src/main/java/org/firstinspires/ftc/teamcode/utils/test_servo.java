@@ -14,13 +14,18 @@ public class test_servo extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         servo1 = hardwareMap.get(Servo.class, "1");
-        servo2 = hardwareMap.get(Servo.class, "2");
+//        servo2 = hardwareMap.get(Servo.class, "2");
         waitForStart();
 
         while(opModeIsActive()){
-            servo1.setPosition(left);
-            servo2.setPosition(right);
-        }
 
+            left += gamepad1.left_stick_x * 0.015;
+            telemetry.addData("pos", left);
+            telemetry.update();
+            servo1.setPosition(left);
+//            servo2.setPosition(right);
+        }
+// 0.57
+        // 0.17
     }
 }

@@ -10,7 +10,10 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 @TeleOp(name = "test_motor", group = "teleop")
 public class test_motor extends LinearOpMode {
     DcMotor motor;
+
+
     public static double putere=-1;
+
     @Override
     public void runOpMode() throws InterruptedException {
         motor = hardwareMap.get(DcMotor.class, "motor");

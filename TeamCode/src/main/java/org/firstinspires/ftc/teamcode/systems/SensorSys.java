@@ -23,6 +23,6 @@ public class SensorSys {
             return ColorSensorData.Purple;
         } else if(green > red && green > blue){
             return ColorSensorData.Green;
-        } else { return (blue>green? ColorSensorData.Purple : ColorSensorData.Green); }
+        } else { return ((blue+red)/2>green? ColorSensorData.Purple : ColorSensorData.Green); }
     }
 }
