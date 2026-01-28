@@ -21,5 +21,9 @@ public class Constants {
 
     public static double liftup = 0.3, liftdown = 0.05;
 
+    public static double glisieraUpForce = 1, glisieraRepaus = -0.08;
+
+    public static long glisierauptime = 200, glisieradowntime = 200;
+
 
 }

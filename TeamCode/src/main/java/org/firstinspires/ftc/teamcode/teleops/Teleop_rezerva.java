@@ -6,6 +6,7 @@ import static org.firstinspires.ftc.teamcode.utils.Constants.slot2;
 import static org.firstinspires.ftc.teamcode.utils.Constants.slot3;
 import static org.firstinspires.ftc.teamcode.utils.Constants.sniperSpeed;
 import static org.firstinspires.ftc.teamcode.utils.Constants.sorterinit;
+import static org.firstinspires.ftc.teamcode.utils.Constants.sorterpos1;
 
 import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -15,6 +16,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.systems.AngleSys;
 import org.firstinspires.ftc.teamcode.systems.ColorSensorData;
+import org.firstinspires.ftc.teamcode.systems.GlisiereSys;
 import org.firstinspires.ftc.teamcode.systems.Hardware;
 import org.firstinspires.ftc.teamcode.systems.IntakeSys;
 import org.firstinspires.ftc.teamcode.systems.LiftSys;
@@ -36,6 +38,8 @@ public class Teleop_rezerva extends LinearOpMode {
     public LiftSys lift;
     public AngleSys angle;
 
+    public GlisiereSys glisiera;
+
 
 
     public void Slotul1(){
@@ -49,25 +53,42 @@ public class Teleop_rezerva extends LinearOpMode {
     public void Slotul3(){
         sorter.setPosition(slot3);
     }
+
+
     @Override
     public void runOpMode() throws InterruptedException {
         sys = new Hardware(hardwareMap);
          sorter = hardwareMap.get(Servo.class, "sorter");
          outake = new OutakeSys(hardwareMap);
          sensor = new SensorSys(hardwareMap);
-      //   mainMotor = new IntakeSys(hardwareMap);
-        lift = new LiftSys( hardwareMap);
+         glisiera= new GlisiereSys(hardwareMap);
+         mainMotor = new IntakeSys(hardwareMap);
+         lift = new LiftSys( hardwareMap);
       //   angle = new AngleSys(hardwareMap);
          sorter.setPosition(sorterinit);
 
 
          waitForStart();
+
+         new Thread(() ->{
+             while(opModeIsActive()){
+                 double px = -gamepad2.left_stick_x * sniperSpeed;
+                 double py = -gamepad2.left_stick_y * sniperSpeed;
+                 double pp = gamepad2.right_stick_x * sniperSpeed;
+                 sys.leftMotorBack.setPower(py+px+pp);
+                 sys.leftMotorFront.setPower(py+pp-px);
+                 sys.rightMotorBack.setPower(py-pp-px);
+                 sys.rightMotorFront.setPower(py-pp+px);
+             }
+         }).start();
+
          while(opModeIsActive()){
              ColorSensorData detected = sensor.getSensorData();
 
 
              if(detected == ColorSensorData.Green){
                  telemetry.addLine("Bila curenta: verde");
+                 sorter.setPosition(sorterpos1);
              }else if(detected == ColorSensorData.Purple){
                  telemetry.addLine("Bila curenta: Mov");
              }else{
@@ -86,48 +107,42 @@ public class Teleop_rezerva extends LinearOpMode {
              if(gamepad1.cross){
                  Slotul3();
              }
- /*            if(gamepad1.square){
-                  mainMotor.startIntake();
 
-              }else{
-                  mainMotor.stopIntake();
-              }
+             if(gamepad1.left_bumper){
+                 mainMotor.startIntake();
+             }else{
+                 mainMotor.stopIntake();
+             }
 
-  */
+             if(gamepad1.right_bumper){
+                 mainMotor.ReverseIntake();
+             }else{
+                 mainMotor.stopIntake();
+             }
 
-            if(gamepad1.dpad_up){
-                  lift.LiftUp();
-              }
-              if(gamepad1.dpad_down){
-                  lift.LiftDown();
-              }
-
-/*              if(gamepad2.dpad_up){
-                  angle.Increase();
-                  sleep(300);
-              }
-              if(gamepad2.dpad_down){
-                  angle.Decrease();
-                  sleep(300);
-              }
-
- */
-              if(gamepad2.cross){
-                  outake.StartOutake();
-              }else{
-                  outake.StopOutake();
-              }
-
-            //Movement
-             double px = -gamepad1.right_stick_x * sniperSpeed;
-              double py = gamepad1.right_stick_y * sniperSpeed;
-              double pp = -gamepad1.left_stick_x * sniperSpeed;
-              sys.leftMotorBack.setPower(py+pp+px);
-              sys.leftMotorFront.setPower(py+pp-px);
-              sys.rightMotorBack.setPower(py-pp-px);
-              sys.rightMotorFront.setPower(py-pp+px);
-
-
+             if(gamepad1.dpad_up){
+                 glisiera.GlisieraUp();
+                 sleep(400);
+                 outake.StartOutake();
+                 Slotul1();
+                 sleep(1500);
+                 lift.LiftUp();
+                 sleep(600);
+                 lift.LiftDown();
+                 Slotul2();
+                 sleep(1500);
+                 lift.LiftUp();
+                 sleep(600);
+                 lift.LiftDown();
+                 Slotul3();
+                 sleep(1500);
+                 lift.LiftUp();
+                 sleep(600);
+                 lift.LiftDown();
+                 outake.StopOutake();
+                 sleep(400);
+                 glisiera.GlisieraDown();
+             }
 
              telemetry.update();
 
